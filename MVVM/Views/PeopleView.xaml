@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="MVVM.Views.PeopleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:MVVM.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodels:PeopleViewModel/>
+    </UserControl.DataContext>
+    <StackPanel Background="White">
+        <Label Content="{Binding Name}" />
+        <Label Content="{Binding Age}" FontSize="18" Height="44" />
+        <Label Content="{Binding Address}" FontSize="18" Height="44" />
+
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Previous" Command="{Binding Previous}" />
+            <Label />
+            <Button Content="Next" Command="{Binding Next}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>
