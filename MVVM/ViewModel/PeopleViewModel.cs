@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿//using GalaSoft.MvvmLight.Command;
 using MVVM.Models;
 using System;
 using System.Collections.Generic;
@@ -50,6 +50,18 @@ namespace MVVM.ViewModel
                 NotifyPropertyChanged(nameof(Address));
             }
         }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                NotifyPropertyChanged(nameof(SearchText));
+            }
+        }
+        public ICommand Search { get; init; }
         public ICommand Previous { get; init; }
         public ICommand Next { get; init; }
 
@@ -66,6 +78,7 @@ namespace MVVM.ViewModel
             Age = people[index].Age.ToString();
             Address = people[index].Address;
 
+            //Relay command is a class that takes an action in as a par
             Previous = new RelayCommand(() =>
             {
                 if (index > 0)
@@ -76,9 +89,13 @@ namespace MVVM.ViewModel
                     Address = people[index].Address;
                 }
             });
-
+            /*Relay Command is our helped class implementing ICommand
+             Allows us to connect a button in xaml to a method (action) inside the viewmodel
+             When button is clicked, WPF calls the RelayCommand.Execute()
+             Which relays and connects the click to the action we passed in here */
             Next = new RelayCommand(() =>
             {
+                //This is the action we are passing to the RelayCommand class's method
                 if (index < people.Length - 1)
                 {
                     index++;
@@ -86,10 +103,30 @@ namespace MVVM.ViewModel
                     Age = people[index].Age.ToString();
                     Address = people[index].Address;
                 }
+            }); 
+            
+            Search = new RelayCommand(() =>
+            {
+                if (string.IsNullOrWhiteSpace(SearchText)) return;
+
+                var foundIndex = Array.FindIndex(people,
+                    p => p.Name.Equals(SearchText, StringComparison.OrdinalIgnoreCase));
+
+                if (foundIndex >= 0)
+                {
+                    index = foundIndex;
+                    Name = people[index].Name;
+                    Age = people[index].Age.ToString();
+                    Address = people[index].Address;
+                }
             });
         }
 
+        //This is the event that HAS to be implemented when using the Notification Interface
         public event PropertyChangedEventHandler PropertyChanged;
+
+        //The above declared event is used in the method below
+        //This method is called in the encapsulation of each variable (setter)
         private void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged is null)

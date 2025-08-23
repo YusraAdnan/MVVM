@@ -10,14 +10,18 @@
         <viewmodels:PeopleViewModel/>
     </UserControl.DataContext>
     <StackPanel Background="White">
-        <Label Content="{Binding Name}" />
-        <Label Content="{Binding Age}" FontSize="18" Height="44" />
-        <Label Content="{Binding Address}" FontSize="18" Height="44" />
+        <Label Content="{Binding Name}" FontSize="18" Width="779" />
+        <Label Content="{Binding Age}" FontSize="18" Height="44" Width="779" />
+        <Label Content="{Binding Address}" FontSize="18" Height="44" Width="775" />
 
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Previous" Command="{Binding Previous}" />
-            <Label />
-            <Button Content="Next" Command="{Binding Next}" />
+        <StackPanel Orientation="Horizontal" Width="778">
+            <Button Content="Previous" Command="{Binding Previous}" Height="41" Width="96" FontSize="18" FontWeight="Bold" />
+            <Button Content="Next" Command="{Binding Next}" Margin="10" Height="41" Width="110" FontSize="18" FontWeight="Bold" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Width="784">
+            <TextBox Width="222" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Height="42" />
+            <Button Content="Search" Command="{Binding Search}" Height="46" Width="144" FontSize="20" FontWeight="Bold" />
         </StackPanel>
     </StackPanel>
 </UserControl>
