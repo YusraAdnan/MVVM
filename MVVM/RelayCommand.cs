@@ -11,7 +11,7 @@ namespace MVVM
     public class RelayCommand : ICommand
     {
         Action action;
-
+       
         public event EventHandler? CanExecuteChanged;
         public RelayCommand(Action action)
         {

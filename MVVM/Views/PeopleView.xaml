@@ -10,7 +10,7 @@
         <viewmodels:PeopleViewModel/>
     </UserControl.DataContext>
     <StackPanel Background="White">
-        <Label Content="{Binding Name}" FontSize="18" Width="779" />
+        <Label Content="{Binding FirstName}" FontSize="18" Width="779" />
         <Label Content="{Binding Age}" FontSize="18" Height="44" Width="779" />
         <Label Content="{Binding Address}" FontSize="18" Height="44" Width="775" />
 

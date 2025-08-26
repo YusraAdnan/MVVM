@@ -1,5 +1,4 @@
-﻿//using GalaSoft.MvvmLight.Command;
-using MVVM.Models;
+﻿using MVVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -14,24 +13,36 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace MVVM.ViewModel
 {
-    public class PeopleViewModel : INotifyPropertyChanged
+    /* ViewModel is a bridge between your Model and your VIew (XAML)
+     * Prepares the data in a way that the UI can bind with 
+     * Implements notifications so the View updates automatically through events handlers 
+     * Exposes (gives the UI) commands to fulfill when a specific button is pressed 
+     * Like the recipe and preparation */
+    public class PeopleViewModel : INotifyPropertyChanged //This is the interface that enables the ViewModel to notify the UI that a change has occured
     {
-        //Bindable properties
+        /* We are not redeclaring these variables for no reason, the viewModel is like the presentation layer
+         * It copies data from the model, raises notifications, if need be it formats or transforms it for the view */
         private string _name;
-        public string Name
+        public string FirstName
         {
-            get => _name;
+            get 
+            { 
+                return _name;
+            }
             private set
             { 
                 _name = value;
-                NotifyPropertyChanged(nameof(Name));
+                NotifyPropertyChanged(nameof(FirstName));
             }
         }
         private string _age;
 
         public string Age
         {
-            get => _age;
+            get
+            {
+                return _age; 
+            }
             private set
             {
                 _age = value;
@@ -43,7 +54,10 @@ namespace MVVM.ViewModel
 
         public string Address
         {
-            get => _address;
+            get 
+            {
+                return _address; 
+            }
             private set 
             {
                _address = value;
@@ -54,7 +68,10 @@ namespace MVVM.ViewModel
         private string _searchText;
         public string SearchText
         {
-            get => _searchText;
+            get
+            {
+                return _searchText;
+            }
             set
             {
                 _searchText = value;
@@ -74,17 +91,17 @@ namespace MVVM.ViewModel
         };
         public PeopleViewModel()
         {
-            Name = people[index].Name;
+            FirstName = people[index].Name;
             Age = people[index].Age.ToString();
             Address = people[index].Address;
 
-            //Relay command is a class that takes an action in as a par
+           
             Previous = new RelayCommand(() =>
             {
                 if (index > 0)
                 {
                     index--;
-                    Name = people[index].Name;
+                    FirstName = people[index].Name;
                     Age = people[index].Age.ToString();
                     Address = people[index].Address;
                 }
@@ -99,7 +116,7 @@ namespace MVVM.ViewModel
                 if (index < people.Length - 1)
                 {
                     index++;
-                    Name = people[index].Name;
+                    FirstName = people[index].Name;
                     Age = people[index].Age.ToString();
                     Address = people[index].Address;
                 }
@@ -115,7 +132,7 @@ namespace MVVM.ViewModel
                 if (foundIndex >= 0)
                 {
                     index = foundIndex;
-                    Name = people[index].Name;
+                    FirstName = people[index].Name;
                     Age = people[index].Age.ToString();
                     Address = people[index].Address;
                 }

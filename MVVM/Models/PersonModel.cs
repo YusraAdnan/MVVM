@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MVVM.Models
 {
+    /* Data container for a person, Nothing UI specific 
+     Represents the raw data and business rules with the UI specs 
+     Its like raw ingredient for a recipe >,< */
     public class PersonModel
     {
         public string Name { get; set; }
